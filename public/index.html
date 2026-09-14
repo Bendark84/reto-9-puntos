@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Reto de los 9 puntos</title><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header><b>RETO DE LOS 9 PUNTOS</b><span id="mode">Juego</span></header>
+
+<section id="home" class="screen">
+  <div class="card">
+    <div class="eyebrow">RETO · 21 SEP 2026</div>
+    <h1>Reto de los 9 puntos</h1>
+    <p>Conecta los 9 puntos usando exactamente <b>4 líneas rectas</b>, sin levantar el dedo.</p>
+    <div class="tabs"><button id="showJoin" class="active">Participante</button><button id="showHost">Presentador</button></div>
+    <div id="joinPanel">
+      <input id="name" maxlength="24" placeholder="Tu nombre">
+      <input id="room" maxlength="5" placeholder="Código de sala" style="text-transform:uppercase">
+      <button id="join" class="primary">Entrar al reto</button>
+    </div>
+    <div id="hostPanel" class="hidden">
+      <button id="create" class="primary">Crear nueva sala</button>
+      <p id="hostHint" class="muted">La sala generará un código y un QR.</p>
+    </div>
+    <p id="msg" class="error"></p>
+  </div>
+</section>
+
+<section id="host" class="screen hidden">
+ <div class="hostWrap">
+  <div class="card heroHost">
+   <div class="eyebrow">PRESENTADOR</div><h1>Sala <span id="roomCode"></span></h1>
+   <div id="qr"><div class="qrPlaceholder">Generando QR…</div></div>
+   <p id="joinUrl" class="small"></p>
+   <div class="stats"><div><b id="count">0</b><small>conectados</small></div><div><b id="solved">0</b><small>completados</small></div><div><b id="state">LISTO</b><small>estado</small></div></div>
+   <div class="durationBox"><label for="duration">Tiempo del reto</label><select id="duration"><option value="60000">1 minuto</option><option value="120000" selected>2 minutos</option><option value="300000">5 minutos</option><option value="480000">8 minutos</option><option value="600000">10 minutos</option></select></div>
+   <div id="hostMessage" class="hostMessage"><span id="hostMessageLabel">Tiempo restante</span><strong id="hostCountdown">02:00.00</strong></div>
+   <div class="actions"><button id="start" class="primary">▶ INICIAR RETO</button><button id="finish" class="secondary">■ TERMINAR</button><button id="reset" class="danger">↻ NUEVA RONDA</button></div>
+  </div>
+  <div class="card results"><div class="eyebrow">RESULTADOS EN VIVO</div><h2>Resultados</h2><div id="list"></div></div>
+ </div>
+</section>
+
+<section id="waiting" class="screen hidden"><div class="card center"><div class="eyebrow">SALA DE ESPERA</div><div class="big" id="waitingCount">0</div><p>participantes conectados</p><div class="loader"></div><h2>Esperando al presentador…</h2><p class="muted">Cuando comience el reto, el cronómetro empezará.</p></div></section>
+
+<section id="game" class="screen hidden"><div class="game"><div class="timer" id="timer">00:00.00</div><canvas id="board" width="600" height="600"></canvas><div id="drawMsg" class="drawMsg"></div><button id="clear" class="secondary">Reiniciar trazo</button><p class="muted">4 líneas · 9 puntos · sin levantar el dedo</p></div></section>
+
+<section id="done" class="screen hidden"><div class="card center"><div class="success">✓</div><div class="eyebrow">¡LO LOGRASTE!</div><h1>Tu tiempo</h1><div class="final" id="final">00:00.00</div><p>Tu resultado ya aparece en la pantalla del presentador.</p></div></section>
+<section id="expired" class="screen hidden"><div class="card center"><div class="success">⏱</div><div class="eyebrow">TIEMPO TERMINADO</div><h1>Reto finalizado</h1><p>Tu resultado no fue completado dentro del tiempo.</p><p class="muted">Mira la pantalla del presentador para ver los resultados.</p></div></section>
+
+<script src="/socket.io/socket.io.js"></script><script src="/app.js"></script>
+</body></html>
