@@ -24,7 +24,7 @@ function finishRoom(room,reason="manual"){
 app.get("/api/qr",async(req,res)=>{
   const room=(req.query.room||"").toUpperCase();
   if(!rooms.has(room)) return res.status(404).send("Sala no encontrada");
-  const url=`http://${getLanIp()}:${PORT}/?room=${room}`;
+  const url=`${process.env.RENDER_EXTERNAL_URL || `http://${getLanIp()}:${PORT}`}/?room=${room}`;
   const png=await QRCode.toDataURL(url,{width:420,margin:2});res.json({url,data:png});
 });
 
