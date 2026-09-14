@@ -1,0 +1,13 @@
+{
+  "name": "pensando-fuera-de-la-caja",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Juego multijugador de los nueve puntos para un devocional",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": {
+    "express": "^5.1.0",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.8.1"
+  }
+}
